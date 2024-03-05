@@ -6,9 +6,12 @@ import TimingSelect from "./components/timingselect/TimingSelect";
 
 function App() {
   const [enddate, setEnddate] = useState("");
+  const [planName, setPlanName] = useState("");
+  const [startDate, setStartDate] = useState("");
 
   const handleDateChange = (e) => {
     const date = new Date(e.target.value);
+    setStartDate(date);
     const today = new Date(Date.now());
 
     if (date.getTime() <= today) {
@@ -17,6 +20,10 @@ function App() {
 
     const selectedBooks = JSON.parse(localStorage.getItem("selectedbooks"));
     const selectedTimes = JSON.parse(localStorage.getItem("selectedtimes"));
+
+    if (!selectedBooks || !selectedTimes) {
+      return alert("Please Select books and times");
+    }
 
     let totalreadingTime = 0;
 
@@ -34,7 +41,7 @@ function App() {
       let singleDayTime = 0;
 
       selectedTimes[index].forEach((time) => {
-        if (!time.startTime == "" || time.endTime == "") {
+        if (time.startTime.length > 0 && time.endTime.length > 0) {
           singleDayTime +=
             JSON.parse(time.endTime).t - JSON.parse(time.startTime).t;
         }
@@ -63,9 +70,32 @@ function App() {
     setEnddate(endDate);
   };
 
+  const handleSubmit = () => {
+    if (planName.length == 0 || startDate.length == 0) {
+      return alert("Please enter all fields");
+    }
+
+    const enteries = JSON.parse(localStorage.getItem("entries"));
+
+    // if(!enteries){
+    //   const newArray = [];
+    //   newArray = [...newArray,{
+    //     id:"sasdsadas",
+    //     title:planName,
+    //     books:
+    //   }]
+    // }else{
+
+    // }
+  };
+
   return (
     <div className="App">
-      <input type="text" placeholder="Plan Title" />
+      <input
+        type="text"
+        placeholder="Plan Title"
+        onChange={(e) => setPlanName(e.target.value)}
+      />
 
       <BookSelect />
 
@@ -79,6 +109,10 @@ function App() {
           <p className="enddate">End Date - {new Date(enddate).toString()}</p>
         )}
       </div>
+
+      <button className="submitbutton" onClick={handleSubmit}>
+        Submit
+      </button>
     </div>
   );
 }

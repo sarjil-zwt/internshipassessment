@@ -80,36 +80,39 @@ const TimingSelect = () => {
   };
 
   const isToOptionDisabled = (k, time, selectedtimeIndex) => {
-    let timesOfDay = timingState[k];
+    if (timingState[k][timingState[k].length - 1].startTime.length > 0) {
+      let timesOfDay = timingState[k];
 
-    if (
-      time.t <=
-      JSON.parse(timingState[k][timingState[k].length - 1].startTime).t
-    ) {
-      return true;
-    }
+      if (
+        time.t <=
+        JSON.parse(timingState[k][timingState[k].length - 1].startTime).t
+      ) {
+        return true;
+      }
 
-    let nextElement = {};
-    let difference = 100;
+      let nextElement = {};
+      let difference = 100;
 
-    if (timesOfDay.length > 1) {
-      for (let i = 0; i < timesOfDay.length - 1; i++) {
-        const element = timesOfDay[i];
-        if (
-          JSON.parse(element.startTime).t >
-            JSON.parse(timingState[k][timingState[k].length - 1].startTime).t &&
-          time.t >= JSON.parse(element.startTime).t
-        ) {
-          return true;
+      if (timesOfDay.length > 1) {
+        for (let i = 0; i < timesOfDay.length - 1; i++) {
+          const element = timesOfDay[i];
+          if (
+            JSON.parse(element.startTime).t >
+              JSON.parse(timingState[k][timingState[k].length - 1].startTime)
+                .t &&
+            time.t >= JSON.parse(element.startTime).t
+          ) {
+            return true;
+          }
         }
       }
-    }
 
-    if (time.t >= nextElement.t) {
-      return true;
-    }
+      if (time.t >= nextElement.t) {
+        return true;
+      }
 
-    return false;
+      return false;
+    }
   };
 
   const handleFromTimeChange = (e, k) => {
@@ -180,10 +183,7 @@ const TimingSelect = () => {
                           }
                         >
                           <option value=""></option>
-                          {!(
-                            selectedtime.startTime == "" ||
-                            selectedtime.disabled
-                          ) &&
+                          {selectedtime.startTime.length > 0 &&
                             times.map((t) => {
                               return (
                                 <option
