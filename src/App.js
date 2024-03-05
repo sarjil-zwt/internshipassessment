@@ -13,6 +13,8 @@ function App() {
 
       <BookSelect />
 
+      <hr />
+
       <TimingSelect />
     </div>
   );

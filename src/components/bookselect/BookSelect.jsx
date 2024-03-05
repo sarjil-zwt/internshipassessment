@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import bookData from "../../bookData.json";
+import "./BookSelect.css";
 
 const BookSelect = () => {
   const [selectedBooks, setSelectedBooks] = useState([
@@ -17,6 +18,8 @@ const BookSelect = () => {
     const filteredBookOptions = lastSelectedBook?.options?.filter(
       (o) => o.id != lastSelectedBook.bookId
     );
+
+    lastSelectedBook.disabled = true;
 
     console.log(lastSelectedBook, filteredBookOptions, "%%%%%%%%%%%%");
 
@@ -37,7 +40,7 @@ const BookSelect = () => {
         return {
           ...item,
           bookId: e.target.value,
-          disabled: true,
+
           chaptersOptions: bookData[index].chapters,
         };
       }
@@ -68,29 +71,36 @@ const BookSelect = () => {
         console.log(sb.bookId);
         return (
           <div className="bookselectdiv">
-            <select
-              name="select"
-              id=""
-              key={index}
-              onChange={(e) => handleSelectedBook(e, index)}
-              disabled={sb.disabled}
-            >
-              <option value=""></option>
-              {sb?.options?.map((o) => {
-                return <option value={o.id}>{o.name}</option>;
-              })}
-            </select>
-
-            <select
-              name=""
-              id=""
-              multiple
-              onChange={(e) => hadleChaptersChange(e, index)}
-            >
-              {sb?.chaptersOptions?.map((chapter) => {
-                return <option value={chapter.id}>{chapter.name}</option>;
-              })}
-            </select>
+            <div className="bookselectelement">
+              <p>Select Book</p>
+              <select
+                name="select"
+                id=""
+                key={index}
+                onChange={(e) => handleSelectedBook(e, index)}
+                disabled={sb.disabled}
+              >
+                <option value=""></option>
+                {sb?.options?.map((o) => {
+                  return <option value={o.id}>{o.name}</option>;
+                })}
+              </select>
+            </div>
+            <div className="bookselectelement">
+              <p>Select Chapters</p>
+              <select
+                name=""
+                id=""
+                multiple
+                onChange={(e) => hadleChaptersChange(e, index)}
+                disabled={sb.disabled}
+                className="bookchapterselect"
+              >
+                {sb?.chaptersOptions?.map((chapter) => {
+                  return <option value={chapter.id}>{chapter.name}</option>;
+                })}
+              </select>
+            </div>
           </div>
         );
       })}

@@ -1,0 +1,17 @@
+.bookselectdivswrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+.bookselectdiv {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.bookchapterselect {
+  min-width: 200px;
+  height: 100px;
+}
