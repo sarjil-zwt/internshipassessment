@@ -64,6 +64,8 @@ const BookSelect = () => {
     });
     console.log(updatedBooks);
     setSelectedBooks(updatedBooks);
+
+    localStorage.setItem("selectedbooks", JSON.stringify(updatedBooks));
   };
   return (
     <div className="bookselectdivswrapper">
