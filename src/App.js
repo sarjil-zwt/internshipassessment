@@ -34,14 +34,14 @@ function App() {
     const today = new Date(Date.now());
 
     if (date.getTime() <= today) {
-      return toast.error("Please select date from tomorrow");
+      return toast("👿 Please select date from tomorrow 👿");
     }
 
     // const selectedBooks = JSON.parse(localStorage.getItem("selectedbooks"));
     // const timingState = JSON.parse(localStorage.getItem("timingState"));
 
     if (!selectedBooks || !timingState) {
-      return toast.error("Please Select books and times");
+      return toast("👿 Please Select books and times 👿");
     }
 
     let totalreadingTime = 0;
@@ -52,6 +52,25 @@ function App() {
           book.chaptersOptions[Number.parseInt(chapter) - 1].no_of_words;
       });
     });
+
+    let totalWeekTime = 0;
+
+    for (let i = 0; i < 7; i++) {
+      let singleDayTime = 0;
+
+      timingState[i].forEach((time) => {
+        if (time.startTime.length > 0 && time.endTime.length > 0) {
+          singleDayTime +=
+            JSON.parse(time.endTime).t - JSON.parse(time.startTime).t;
+        }
+      });
+
+      totalWeekTime += singleDayTime;
+    }
+
+    if (totalWeekTime <= 0) {
+      return toast("🙏 Please select some time to read 🙏");
+    }
 
     let index = date.getDay();
     let totalReadingDays = 0;
@@ -116,7 +135,7 @@ function App() {
 
   const handleSubmit = () => {
     if (planName.length == 0 || startDate.length == 0) {
-      return toast.error("Please enter all fields");
+      return toast("👿 Please enter all fields 👿");
     }
 
     const enteries = localStorage.getItem("entries")
@@ -126,7 +145,7 @@ function App() {
     const entry = enteries.find((e) => e.title == planName);
 
     if (entry) {
-      return toast.error("Plan name already exist");
+      return toast("😥 Plan name already exist 😥");
     }
 
     const newTimingState = timingState;
@@ -206,18 +225,25 @@ function App() {
       6: [],
     });
 
+    setPlanName("");
+    setEnddate("");
+    setStartDate("");
     toast.success("Entry Added");
   };
 
   return (
     <div className="App">
-      <Toaster position="top-right" />
+      <Toaster position="top-center" reverseOrder={true} />
       <div className="header">
-        <input
-          type="text"
-          placeholder="Plan Title"
-          onChange={(e) => setPlanName(e.target.value)}
-        />
+        <div>
+          <p>Plan Name: </p>
+          <input
+            type="text"
+            placeholder="Plan Title"
+            value={planName}
+            onChange={(e) => setPlanName(e.target.value)}
+          />
+        </div>
       </div>
 
       <BookSelect

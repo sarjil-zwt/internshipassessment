@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import "./TimingSelect.css";
 import times from "../times";
+import toast from "react-hot-toast";
 
 const days = [
   "Sunday",
@@ -19,9 +20,7 @@ const TimingSelect = ({ timingState, setTimingState }) => {
         timingState[index][timingState[index].length - 1].startTime === "" ||
         timingState[index][timingState[index].length - 1].endTime === ""
       ) {
-        return alert(
-          `please enter from time and end time for week ${days[index]}`
-        );
+        return toast(`👿 Complete open slot before creating new one 👿`);
       }
 
       timingState[index][timingState[index].length - 1].disabled = true;
@@ -115,9 +114,9 @@ const TimingSelect = ({ timingState, setTimingState }) => {
 
   return (
     <div className="timingselectdivswrapper">
-      {Object.keys(timingState).map((k) => {
+      {Object.keys(timingState).map((k, idx) => {
         return (
-          <>
+          <Fragment key={idx}>
             <div key={k} className="timingselectdiv">
               <div className="timingselectheading">
                 <p>{k}</p>
@@ -126,7 +125,7 @@ const TimingSelect = ({ timingState, setTimingState }) => {
               <div className="dividerhz"></div>
               {timingState[k].map((selectedtime, i) => {
                 return (
-                  <>
+                  <Fragment key={i}>
                     <div className="timingselectoptionsdiv" key={i}>
                       <div className="timingselectoptionelement">
                         <p>From Time</p>
@@ -138,11 +137,12 @@ const TimingSelect = ({ timingState, setTimingState }) => {
                           disabled={selectedtime.disabled}
                         >
                           <option value=""></option>
-                          {times.map((t) => {
+                          {times.map((t, id) => {
                             return (
                               <option
                                 value={JSON.stringify(t)}
                                 disabled={isFromOptionDisabled(k, t)}
+                                key={id}
                               >
                                 {`${t.hours}:${t.minutes} ${t.meridiem}`}
                               </option>
@@ -164,11 +164,12 @@ const TimingSelect = ({ timingState, setTimingState }) => {
                         >
                           <option value=""></option>
                           {selectedtime.startTime.length > 0 &&
-                            times.map((t) => {
+                            times.map((t, id) => {
                               return (
                                 <option
                                   value={JSON.stringify(t)}
                                   disabled={isToOptionDisabled(k, t, i)}
+                                  key={id}
                                 >{`${t.hours}:${t.minutes} ${t.meridiem}`}</option>
                               );
                             })}
@@ -176,7 +177,7 @@ const TimingSelect = ({ timingState, setTimingState }) => {
                       </div>
                     </div>
                     <div className="dividerhz"></div>
-                  </>
+                  </Fragment>
                 );
               })}
               <button
@@ -190,7 +191,7 @@ const TimingSelect = ({ timingState, setTimingState }) => {
               </button>
             </div>
             {k != 6 && <div className="divider"></div>}
-          </>
+          </Fragment>
         );
       })}
     </div>

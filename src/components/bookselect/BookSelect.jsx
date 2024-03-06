@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import bookData from "../../bookData.json";
 import "./BookSelect.css";
+import toast from "react-hot-toast";
 
 const BookSelect = ({ selectedBooks, setSelectedBooks }) => {
   const handleAddBook = () => {
     const lastSelectedBook = selectedBooks[selectedBooks.length - 1];
 
     if (lastSelectedBook.bookId.length <= 0) {
-      return alert("Please select all fields");
+      return toast("👿 Complete open slot before creating new one 👿");
     }
 
     const filteredBookOptions = lastSelectedBook?.options?.filter(
@@ -65,7 +66,7 @@ const BookSelect = ({ selectedBooks, setSelectedBooks }) => {
     <div className="bookselectdivswrapper">
       {selectedBooks?.map((sb, index) => {
         return (
-          <div className="bookselectdiv">
+          <div className="bookselectdiv" key={index}>
             <div className="bookselectelement">
               <p>Select Book</p>
               <select
@@ -74,10 +75,15 @@ const BookSelect = ({ selectedBooks, setSelectedBooks }) => {
                 key={index}
                 onChange={(e) => handleSelectedBook(e, index)}
                 disabled={sb.disabled}
+                value={selectedBooks[index].bookId}
               >
                 <option value=""></option>
-                {sb?.options?.map((o) => {
-                  return <option value={o.id}>{o.name}</option>;
+                {sb?.options?.map((o, i) => {
+                  return (
+                    <option value={o.id} key={i}>
+                      {o.name}
+                    </option>
+                  );
                 })}
               </select>
             </div>

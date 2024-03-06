@@ -23,6 +23,7 @@
 ::-webkit-scrollbar-thumb {
   background-color: gray;
 }
+
 button {
   cursor: pointer;
   padding: 5px;
@@ -70,15 +71,19 @@ hr {
 .header {
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
   width: 80%;
   padding: 50px;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-
-.header > input {
+.header > div {
   width: 50%;
+}
+
+.header > div > input {
+  width: 100%;
 }
 
 .footer {
