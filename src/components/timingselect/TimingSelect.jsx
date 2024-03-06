@@ -36,14 +36,12 @@ const TimingSelect = ({ timingState, setTimingState }) => {
     };
 
     updatedTimes[index] = [...timingState[index], newField];
-    console.log(updatedTimes);
 
     setTimingState(updatedTimes);
   };
 
   const isFromOptionDisabled = (k, time) => {
     let timesOfDay = timingState[k];
-    // console.log(timesOfDay, "Times of day");
 
     if (timesOfDay.length > 1) {
       for (let i = 0; i < timesOfDay.length - 1; i++) {

@@ -42,8 +42,6 @@ const BookSelect = ({ selectedBooks, setSelectedBooks }) => {
       return item;
     });
 
-    console.log(updatedBooks);
-
     setSelectedBooks(updatedBooks);
   };
 
@@ -59,7 +57,6 @@ const BookSelect = ({ selectedBooks, setSelectedBooks }) => {
       }
       return item;
     });
-    console.log(updatedBooks);
     setSelectedBooks(updatedBooks);
   };
   return (
@@ -97,8 +94,12 @@ const BookSelect = ({ selectedBooks, setSelectedBooks }) => {
                 disabled={sb.disabled}
                 className="bookchapterselect"
               >
-                {sb?.chaptersOptions?.map((chapter) => {
-                  return <option value={chapter.id}>{chapter.name}</option>;
+                {sb?.chaptersOptions?.map((chapter, i) => {
+                  return (
+                    <option value={chapter.id} key={i}>
+                      {chapter.name}
+                    </option>
+                  );
                 })}
               </select>
             </div>

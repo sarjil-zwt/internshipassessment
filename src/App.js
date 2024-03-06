@@ -37,9 +37,6 @@ function App() {
       return toast("👿 Please select date from tomorrow 👿");
     }
 
-    // const selectedBooks = JSON.parse(localStorage.getItem("selectedbooks"));
-    // const timingState = JSON.parse(localStorage.getItem("timingState"));
-
     if (!selectedBooks || !timingState) {
       return toast("👿 Please Select books and times 👿");
     }
@@ -180,8 +177,6 @@ function App() {
         },
       ];
 
-      console.log(newArray);
-
       localStorage.setItem("entries", JSON.stringify(newArray));
     } else {
       const newArray = [
@@ -203,8 +198,6 @@ function App() {
 
       localStorage.setItem("entries", JSON.stringify(newArray));
     }
-
-    console.log(timingState, selectedBooks, "**************");
 
     setSelectedBooks([
       {
@@ -234,7 +227,9 @@ function App() {
   return (
     <div className="App">
       <Toaster position="top-center" reverseOrder={true} />
-      <div className="header">
+
+      <div className="top">
+        <h1>👨🏻‍💻 Interns Practical Assessment 👨🏻‍💻</h1>
         <div>
           <p>Plan Name: </p>
           <input
@@ -255,10 +250,25 @@ function App() {
 
       <div className="footer">
         <div className="dates">
-          <input type="date" onChange={handleDateChange} name="" id="" />
-          {enddate && (
-            <p className="enddate">End Date - {moment(enddate).format("ll")}</p>
-          )}
+          <div>
+            <p>Start Date</p>
+            <input
+              type="date"
+              className="startdate"
+              onChange={handleDateChange}
+              name=""
+              id=""
+            />
+          </div>
+
+          <div>
+            <p className="">End Date </p>
+            <p className="enddate">
+              {enddate
+                ? moment(enddate).format("ll")
+                : "Please select start date first"}
+            </p>
+          </div>
         </div>
 
         <button className="submitbutton" onClick={handleSubmit}>

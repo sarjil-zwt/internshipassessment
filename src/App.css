@@ -68,7 +68,7 @@ hr {
   margin: 50px 0;
 }
 
-.header {
+.top {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -77,12 +77,13 @@ hr {
   padding: 50px;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  gap: 50px;
 }
-.header > div {
+.top > div {
   width: 50%;
 }
 
-.header > div > input {
+.top > div > input {
   width: 100%;
 }
 
@@ -106,5 +107,19 @@ hr {
 }
 
 .dates > input {
+  width: 200px;
+}
+
+.startdate {
+  width: 200px;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.enddate {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid rgb(216, 216, 216);
   width: 200px;
 }
