@@ -111,7 +111,7 @@ const TimingSelect = ({ timingState, setTimingState }) => {
   };
 
   return (
-    <div className="timingselectdivswrapper">
+    <div className="timingselectdivswrapper container">
       {Object.keys(timingState).map((k, idx) => {
         return (
           <Fragment key={idx}>

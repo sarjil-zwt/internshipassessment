@@ -60,7 +60,7 @@ const BookSelect = ({ selectedBooks, setSelectedBooks }) => {
     setSelectedBooks(updatedBooks);
   };
   return (
-    <div className="bookselectdivswrapper">
+    <div className="bookselectdivswrapper container">
       {selectedBooks?.map((sb, index) => {
         return (
           <div className="bookselectdiv" key={index}>

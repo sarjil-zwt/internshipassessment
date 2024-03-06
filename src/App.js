@@ -174,7 +174,7 @@ function App() {
               chapters: [...b.chapters],
             };
           }),
-          timing: newTimingState.filter((ts) => ts == null),
+          timing: newTimingState,
           start_date: moment(startDate, "dd-mm-yyyy"),
           end_date: moment(enddate, "dd-mm-yyyy"),
         },
@@ -236,7 +236,7 @@ function App() {
     <div className="App">
       <Toaster position="top-center" reverseOrder={true} />
 
-      <div className="top">
+      <div className="top container">
         <h1>👨🏻‍💻 Interns Practical Assessment 👨🏻‍💻</h1>
         <div>
           <p>Plan Name: </p>
@@ -256,7 +256,7 @@ function App() {
 
       <TimingSelect timingState={timingState} setTimingState={setTimingState} />
 
-      <div className="footer">
+      <div className="footer container">
         <div className="dates">
           <div>
             <p>Start Date</p>
