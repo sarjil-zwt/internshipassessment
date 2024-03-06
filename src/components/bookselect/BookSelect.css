@@ -3,15 +3,28 @@
   flex-direction: column;
   align-items: center;
   gap: 50px;
+  width: 50%;
+
+  /* border: 1px solid red; */
+  padding: 50px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .bookselectdiv {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: center;
   gap: 30px;
+  width: 100%;
 }
 
-.bookchapterselect {
-  min-width: 200px;
-  height: 100px;
+.bookselectelement {
+  width: 100%;
+  /* border: 1px solid black; */
+  height: 100%;
+  /* min-height: 200px; */
+}
+
+select.bookchapterselect {
+  min-height: 150px;
 }

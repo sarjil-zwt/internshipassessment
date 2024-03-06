@@ -15,6 +15,10 @@ const BookSelect = () => {
   const handleAddBook = () => {
     const lastSelectedBook = selectedBooks[selectedBooks.length - 1];
 
+    if (lastSelectedBook.bookId.length <= 0) {
+      return alert("Please select all fields");
+    }
+
     const filteredBookOptions = lastSelectedBook?.options?.filter(
       (o) => o.id != lastSelectedBook.bookId
     );
