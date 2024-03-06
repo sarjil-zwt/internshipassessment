@@ -80,6 +80,10 @@ select {
   border: none;
 }
 
+select::-webkit-scrollbar-thumb {
+  background-color: #060b10;
+}
+
 select:hover {
   /* background-color: var(--hover-bgcolor); */
   color: var(--color-high);
@@ -103,6 +107,12 @@ select option {
 select option:checked {
   background-color: var(--hover-bgcolor);
 }
+
+select option:disabled {
+  background-color: #060b10;
+  cursor: progress;
+}
+
 select:disabled {
   background-color: #060b10;
   color: var(--color-secondary);
