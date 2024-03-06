@@ -1,3 +1,11 @@
+:root {
+  --border-color: rgb(70, 82, 99);
+  --color-high: rgb(255, 255, 255);
+  --color-secondary: rgb(183, 194, 206);
+  --hover-bgcolor: rgb(59, 80, 110);
+  --outline-color: rgb(59, 80, 110);
+}
+
 .App {
   padding: 100px 0;
   display: flex;
@@ -5,11 +13,25 @@
   align-items: center;
   gap: 50px;
   /* justify-content: center; */
+  background-color: #060b10;
+}
+
+.container {
+  background-color: #12181f;
+  color: var(--color-secondary);
+  border: 1px solid var(--border-color);
+  padding: 50px;
+  width: 80%;
+  gap: 30px;
+  border-radius: 10px;
 }
 
 * {
   padding: 0px;
   margin: 0px;
+}
+body {
+  background-color: #060b10;
 }
 
 ::-webkit-scrollbar {
@@ -21,47 +43,96 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: gray;
+  background-color: #2f3f50;
   border-radius: 5px;
+}
+
+h1 {
+  color: var(--color-high);
 }
 
 button {
   cursor: pointer;
   padding: 5px;
   min-width: 150px;
-  border: 1px solid black;
-  background-color: white;
+  color: var(--color-secondary);
+  background-color: rgb(59, 67, 76);
   border-radius: 5px;
   transition: 0.2s all;
+  font-weight: 700;
+  font-size: 20px;
+  border: none;
 }
 
 button:hover {
-  background-color: black;
-  color: white;
+  background-color: var(--hover-bgcolor);
+  color: var(--color-high);
 }
 
 select {
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 5px;
-  border: 1px solid rgb(216, 216, 216);
+  background-color: rgb(59, 67, 76);
   min-width: 100%;
+  color: var(--color-secondary);
+  transition: 0.2s all;
+  border: none;
+}
+
+select:hover {
+  /* background-color: var(--hover-bgcolor); */
+  color: var(--color-high);
+}
+
+select:focus {
+  outline: 4px solid var(--outline-color);
+}
+
+select:active {
+  outline: 4px solid var(--border-color);
+}
+
+select option {
+  background-color: rgb(59, 67, 76);
+  color: var(--color-secondary);
+  cursor: pointer;
+  transition: 0.2s all;
+  padding: 5px;
+}
+select option:checked {
+  background-color: var(--hover-bgcolor);
+}
+select:disabled {
+  background-color: #060b10;
+  color: var(--color-secondary);
+}
+
+select:disabled option {
+  background-color: #060b10;
+}
+select:disabled option:checked {
+  background-color: #12181f;
+}
+
+select option:hover {
+  background-color: #12181f;
 }
 
 input {
   padding: 0.5rem;
   border-radius: 5px;
-  border: 1px solid rgb(216, 216, 216);
+  border: 1px solid var(--border-color);
+  background-color: rgb(59, 67, 76);
+  color: var(--color-secondary);
+  cursor: pointer;
+}
+input:hover {
+  background-color: var(--hover-bgcolor);
+  color: var(--color-high);
 }
 input:focus {
   outline: none;
-}
-select:focus {
-  outline: none;
-}
-
-option {
-  cursor: pointer;
 }
 
 hr {
@@ -74,11 +145,6 @@ hr {
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  width: 80%;
-  padding: 50px;
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  gap: 50px;
 }
 .top > div {
   width: 50%;
@@ -93,10 +159,6 @@ hr {
   flex-direction: column;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  padding: 50px;
-  width: 80%;
-  gap: 30px;
-  border-radius: 10px;
 }
 
 .footer > .dates {
@@ -121,6 +183,12 @@ hr {
   padding: 0.5rem;
   font-size: 1rem;
   border-radius: 5px;
-  border: 1px solid rgb(216, 216, 216);
+  background-color: rgb(59, 67, 76);
+  cursor: pointer;
+
+  border: 1px solid var(--border-color);
   width: 200px;
+}
+.enddate:hover {
+  background-color: var(--hover-bgcolor);
 }

@@ -36,7 +36,7 @@ const BookSelect = ({ selectedBooks, setSelectedBooks }) => {
           bookId: e.target.value,
 
           chaptersOptions:
-            bookData[Number.parseInt(e.target.value) - 1].chapters,
+            bookData[Number.parseInt(e.target.value) - 1]?.chapters,
         };
       }
       return item;
@@ -96,7 +96,11 @@ const BookSelect = ({ selectedBooks, setSelectedBooks }) => {
               >
                 {sb?.chaptersOptions?.map((chapter, i) => {
                   return (
-                    <option value={chapter.id} key={i}>
+                    <option
+                      value={chapter.id}
+                      key={i}
+                      selected={sb.chapters.includes(chapter.id)}
+                    >
                       {chapter.name}
                     </option>
                   );
