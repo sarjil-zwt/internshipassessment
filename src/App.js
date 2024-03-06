@@ -139,22 +139,13 @@ function App() {
       ? JSON.parse(localStorage.getItem("entries"))
       : null;
 
-    const entry = enteries.find((e) => e.title == planName);
-
-    if (entry) {
-      return toast("😥 Plan name already exist 😥");
-    }
-
     const newTimingState = timingState;
-
-    console.log(newTimingState, "******");
 
     Object.keys(newTimingState).forEach((k) => {
       newTimingState[k] = newTimingState[k].filter((o) => {
         return o.startTime.length != 0 || o.endTime.length != 0;
       });
     });
-    console.log(newTimingState, "after filter******");
 
     Object.keys(newTimingState).forEach((k) => {
       newTimingState[k] = newTimingState[k].map((o) => {
@@ -191,6 +182,11 @@ function App() {
 
       localStorage.setItem("entries", JSON.stringify(newArray));
     } else {
+      const entry = enteries.find((e) => e.title == planName);
+
+      if (entry) {
+        return toast("😥 Plan name already exist 😥");
+      }
       const newArray = [
         ...enteries,
         {
