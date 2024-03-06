@@ -201,7 +201,7 @@ const TimingSelect = () => {
                 +
               </button>
             </div>
-            <div className="divider"></div>
+            {k != 6 && <div className="divider"></div>}
           </>
         );
       })}

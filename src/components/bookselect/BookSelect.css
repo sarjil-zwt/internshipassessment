@@ -3,10 +3,11 @@
   flex-direction: column;
   align-items: center;
   gap: 50px;
-  width: 50%;
+  width: 80%;
 
   /* border: 1px solid red; */
   padding: 50px;
+  border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 

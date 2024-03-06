@@ -71,6 +71,7 @@ function App() {
     setEnddate(endDate);
   };
 
+  //Random Id Generation
   function generateUUID() {
     // Public Domain/MIT
     var d = new Date().getTime(); //Timestamp
@@ -183,28 +184,30 @@ function App() {
 
   return (
     <div className="App">
-      <input
-        type="text"
-        placeholder="Plan Title"
-        onChange={(e) => setPlanName(e.target.value)}
-      />
+      <div className="header">
+        <input
+          type="text"
+          placeholder="Plan Title"
+          onChange={(e) => setPlanName(e.target.value)}
+        />
+      </div>
 
       <BookSelect />
-
-      <hr />
 
       <TimingSelect />
 
       <div className="footer">
-        <input type="date" onChange={handleDateChange} name="" id="" />
-        {enddate && (
-          <p className="enddate">End Date - {new Date(enddate).toString()}</p>
-        )}
-      </div>
+        <div className="dates">
+          <input type="date" onChange={handleDateChange} name="" id="" />
+          {enddate && (
+            <p className="enddate">End Date - {moment(enddate).format("ll")}</p>
+          )}
+        </div>
 
-      <button className="submitbutton" onClick={handleSubmit}>
-        Submit
-      </button>
+        <button className="submitbutton" onClick={handleSubmit}>
+          Submit
+        </button>
+      </div>
     </div>
   );
 }
