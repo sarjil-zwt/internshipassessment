@@ -25,8 +25,6 @@ const BookSelect = () => {
 
     lastSelectedBook.disabled = true;
 
-    console.log(lastSelectedBook, filteredBookOptions, "%%%%%%%%%%%%");
-
     setSelectedBooks([
       ...selectedBooks,
       {
@@ -74,7 +72,6 @@ const BookSelect = () => {
   return (
     <div className="bookselectdivswrapper">
       {selectedBooks?.map((sb, index) => {
-        console.log(sb.bookId);
         return (
           <div className="bookselectdiv">
             <div className="bookselectelement">

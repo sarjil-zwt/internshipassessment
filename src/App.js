@@ -4,6 +4,7 @@ import bookData from "./bookData.json";
 import BookSelect from "./components/bookselect/BookSelect";
 import TimingSelect from "./components/timingselect/TimingSelect";
 import moment from "moment";
+import toast, { Toaster } from "react-hot-toast";
 
 function App() {
   const [enddate, setEnddate] = useState("");
@@ -35,7 +36,7 @@ function App() {
       });
     });
 
-    let index = 0;
+    let index = date.getDay();
     let totalReadingDays = 0;
 
     while (totalreadingTime > 0) {
@@ -50,23 +51,21 @@ function App() {
 
       const readingMinutes = singleDayTime * 15 * 50;
 
-      console.log(readingMinutes, index, "*******&&&&&&&*********");
-
       totalreadingTime -= readingMinutes;
 
-      totalReadingDays++;
+      if (totalreadingTime <= 0) {
+        break;
+      }
       if (index == 6) {
         index = 0;
+        totalReadingDays++;
       } else {
         index++;
+        totalReadingDays++;
       }
     }
 
-    console.log(totalReadingDays, "Total reading days");
-
-    const endDate = new Date(
-      date.setDate(date.getDate() + (totalReadingDays - 1))
-    );
+    const endDate = new Date(date.setDate(date.getDate() + totalReadingDays));
 
     setEnddate(endDate);
   };
@@ -180,10 +179,13 @@ function App() {
       localStorage.setItem("entries", JSON.stringify(newArray));
       console.log(newArray);
     }
+
+    toast.success("Entry Added");
   };
 
   return (
     <div className="App">
+      <Toaster />
       <div className="header">
         <input
           type="text"
