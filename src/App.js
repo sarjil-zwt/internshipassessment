@@ -10,6 +10,23 @@ function App() {
   const [enddate, setEnddate] = useState("");
   const [planName, setPlanName] = useState("");
   const [startDate, setStartDate] = useState("");
+  const [selectedBooks, setSelectedBooks] = useState([
+    {
+      bookId: "",
+      chapters: [],
+      chaptersOptions: [],
+      options: bookData,
+    },
+  ]);
+  const [timingState, setTimingState] = useState({
+    0: [],
+    1: [],
+    2: [],
+    3: [],
+    4: [],
+    5: [],
+    6: [],
+  });
 
   const handleDateChange = (e) => {
     const date = new Date(e.target.value);
@@ -17,14 +34,14 @@ function App() {
     const today = new Date(Date.now());
 
     if (date.getTime() <= today) {
-      return alert("Please select date from tomorrow");
+      return toast.error("Please select date from tomorrow");
     }
 
-    const selectedBooks = JSON.parse(localStorage.getItem("selectedbooks"));
-    const selectedTimes = JSON.parse(localStorage.getItem("selectedtimes"));
+    // const selectedBooks = JSON.parse(localStorage.getItem("selectedbooks"));
+    // const timingState = JSON.parse(localStorage.getItem("timingState"));
 
-    if (!selectedBooks || !selectedTimes) {
-      return alert("Please Select books and times");
+    if (!selectedBooks || !timingState) {
+      return toast.error("Please Select books and times");
     }
 
     let totalreadingTime = 0;
@@ -42,7 +59,7 @@ function App() {
     while (totalreadingTime > 0) {
       let singleDayTime = 0;
 
-      selectedTimes[index].forEach((time) => {
+      timingState[index].forEach((time) => {
         if (time.startTime.length > 0 && time.endTime.length > 0) {
           singleDayTime +=
             JSON.parse(time.endTime).t - JSON.parse(time.startTime).t;
@@ -99,34 +116,23 @@ function App() {
 
   const handleSubmit = () => {
     if (planName.length == 0 || startDate.length == 0) {
-      return alert("Please enter all fields");
+      return toast.error("Please enter all fields");
     }
 
     const enteries = localStorage.getItem("entries")
       ? JSON.parse(localStorage.getItem("entries"))
       : null;
 
-    const selectedBooks = localStorage.getItem("selectedbooks")
-      ? JSON.parse(localStorage.getItem("selectedbooks"))
-      : null;
-    const selectedTimes = localStorage.getItem("selectedtimes")
-      ? JSON.parse(localStorage.getItem("selectedtimes"))
-      : null;
-
-    if (!selectedBooks || !selectedTimes) {
-      return alert(
-        "Something went wrong please refresh the page and try to add fields again!!"
-      );
-    }
-
     const entry = enteries.find((e) => e.title == planName);
 
     if (entry) {
-      return alert("Plan name already exist");
+      return toast.error("Plan name already exist");
     }
 
-    Object.keys(selectedTimes).forEach((k) => {
-      selectedTimes[k] = selectedTimes[k].map((o) => {
+    const newTimingState = timingState;
+
+    Object.keys(newTimingState).forEach((k) => {
+      newTimingState[k] = newTimingState[k].map((o) => {
         let stime = JSON.parse(o.startTime);
         let etime = JSON.parse(o.endTime);
         return {
@@ -149,7 +155,7 @@ function App() {
               chapters: [...b.chapters],
             };
           }),
-          timing: selectedTimes,
+          timing: newTimingState,
           start_date: moment(startDate, "dd-mm-yyyy"),
           end_date: moment(enddate, "dd-mm-yyyy"),
         },
@@ -170,22 +176,42 @@ function App() {
               chapters: [...b.chapters],
             };
           }),
-          timing: selectedTimes,
+          timing: newTimingState,
           start_date: moment(startDate, "dd-mm-yyyy"),
           end_date: moment(enddate, "dd-mm-yyyy"),
         },
       ];
 
       localStorage.setItem("entries", JSON.stringify(newArray));
-      console.log(newArray);
     }
+
+    console.log(timingState, selectedBooks, "**************");
+
+    setSelectedBooks([
+      {
+        bookId: "",
+        chapters: [],
+        chaptersOptions: [],
+        options: bookData,
+      },
+    ]);
+
+    setTimingState({
+      0: [],
+      1: [],
+      2: [],
+      3: [],
+      4: [],
+      5: [],
+      6: [],
+    });
 
     toast.success("Entry Added");
   };
 
   return (
     <div className="App">
-      <Toaster />
+      <Toaster position="top-right" />
       <div className="header">
         <input
           type="text"
@@ -194,9 +220,12 @@ function App() {
         />
       </div>
 
-      <BookSelect />
+      <BookSelect
+        selectedBooks={selectedBooks}
+        setSelectedBooks={setSelectedBooks}
+      />
 
-      <TimingSelect />
+      <TimingSelect timingState={timingState} setTimingState={setTimingState} />
 
       <div className="footer">
         <div className="dates">

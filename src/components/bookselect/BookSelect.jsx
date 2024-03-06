@@ -2,16 +2,7 @@ import React, { useState } from "react";
 import bookData from "../../bookData.json";
 import "./BookSelect.css";
 
-const BookSelect = () => {
-  const [selectedBooks, setSelectedBooks] = useState([
-    {
-      bookId: "",
-      chapters: [],
-      chaptersOptions: [],
-      options: bookData,
-    },
-  ]);
-
+const BookSelect = ({ selectedBooks, setSelectedBooks }) => {
   const handleAddBook = () => {
     const lastSelectedBook = selectedBooks[selectedBooks.length - 1];
 
@@ -43,11 +34,14 @@ const BookSelect = () => {
           ...item,
           bookId: e.target.value,
 
-          chaptersOptions: bookData[index].chapters,
+          chaptersOptions:
+            bookData[Number.parseInt(e.target.value) - 1].chapters,
         };
       }
       return item;
     });
+
+    console.log(updatedBooks);
 
     setSelectedBooks(updatedBooks);
   };
@@ -66,8 +60,6 @@ const BookSelect = () => {
     });
     console.log(updatedBooks);
     setSelectedBooks(updatedBooks);
-
-    localStorage.setItem("selectedbooks", JSON.stringify(updatedBooks));
   };
   return (
     <div className="bookselectdivswrapper">

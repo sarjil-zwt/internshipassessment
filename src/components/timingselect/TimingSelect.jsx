@@ -12,17 +12,7 @@ const days = [
   "Saturday",
 ];
 
-const TimingSelect = () => {
-  const [timingState, setTimingState] = useState({
-    0: [],
-    1: [],
-    2: [],
-    3: [],
-    4: [],
-    5: [],
-    6: [],
-  });
-
+const TimingSelect = ({ timingState, setTimingState }) => {
   const handleTimeAddButtonClick = (index) => {
     if (timingState[index].length > 0) {
       if (
@@ -121,8 +111,6 @@ const TimingSelect = () => {
     };
     updatedTimes[k][updatedTimes[k].length - 1].endTime = e.target.value;
     setTimingState(updatedTimes);
-
-    localStorage.setItem("selectedtimes", JSON.stringify(updatedTimes));
   };
 
   return (
