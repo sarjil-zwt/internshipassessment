@@ -147,10 +147,22 @@ function App() {
 
     const newTimingState = timingState;
 
+    console.log(newTimingState, "******");
+
+    Object.keys(newTimingState).forEach((k) => {
+      newTimingState[k] = newTimingState[k].filter((o) => {
+        return o.startTime.length != 0 || o.endTime.length != 0;
+      });
+    });
+    console.log(newTimingState, "after filter******");
+
     Object.keys(newTimingState).forEach((k) => {
       newTimingState[k] = newTimingState[k].map((o) => {
         let stime = JSON.parse(o.startTime);
         let etime = JSON.parse(o.endTime);
+        if (!stime || !etime) {
+          return null;
+        }
         return {
           start: stime.hours + ":" + stime.minutes + " " + stime.meridiem,
           end: etime.hours + ":" + etime.minutes + " " + etime.meridiem,
@@ -171,7 +183,7 @@ function App() {
               chapters: [...b.chapters],
             };
           }),
-          timing: newTimingState,
+          timing: newTimingState.filter((ts) => ts == null),
           start_date: moment(startDate, "dd-mm-yyyy"),
           end_date: moment(enddate, "dd-mm-yyyy"),
         },
