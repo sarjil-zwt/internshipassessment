@@ -52,14 +52,6 @@ const TimingSelect = () => {
     setTimingState(updatedTimes);
   };
 
-  const compareTimes = (time1, time2) => {
-    if (time1.t >= time2.t) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   const isFromOptionDisabled = (k, time) => {
     let timesOfDay = timingState[k];
     // console.log(timesOfDay, "Times of day");

@@ -3,6 +3,7 @@ import "./App.css";
 import bookData from "./bookData.json";
 import BookSelect from "./components/bookselect/BookSelect";
 import TimingSelect from "./components/timingselect/TimingSelect";
+import moment from "moment";
 
 function App() {
   const [enddate, setEnddate] = useState("");
@@ -75,18 +76,77 @@ function App() {
       return alert("Please enter all fields");
     }
 
-    const enteries = JSON.parse(localStorage.getItem("entries"));
+    const enteries = localStorage.getItem("entries")
+      ? JSON.parse(localStorage.getItem("entries"))
+      : null;
 
-    // if(!enteries){
-    //   const newArray = [];
-    //   newArray = [...newArray,{
-    //     id:"sasdsadas",
-    //     title:planName,
-    //     books:
-    //   }]
-    // }else{
+    const selectedBooks = localStorage.getItem("selectedbooks")
+      ? JSON.parse(localStorage.getItem("selectedbooks"))
+      : null;
+    const selectedTimes = localStorage.getItem("selectedtimes")
+      ? JSON.parse(localStorage.getItem("selectedtimes"))
+      : null;
 
-    // }
+    if (!selectedBooks || !selectedTimes) {
+      return alert(
+        "Something went wrong please refresh the page and try to add fields again!!"
+      );
+    }
+
+    Object.keys(selectedTimes).forEach((k) => {
+      selectedTimes[k] = selectedTimes[k].map((o) => {
+        let stime = JSON.parse(o.startTime);
+        let etime = JSON.parse(o.endTime);
+        return {
+          start: stime.hours + ":" + stime.minutes + " " + stime.meridiem,
+          end: etime.hours + ":" + etime.minutes + " " + etime.meridiem,
+        };
+      });
+    });
+
+    if (!enteries) {
+      let newArray = [];
+      newArray = [
+        ...newArray,
+        {
+          id: "sasdsadas",
+          title: planName,
+          books: selectedBooks.map((b) => {
+            return {
+              book_id: b.bookId,
+              chapters: [...b.chapters],
+            };
+          }),
+          timing: selectedTimes,
+          start_date: moment(startDate, "dd-mm-yyyy"),
+          end_date: moment(enddate, "dd-mm-yyyy"),
+        },
+      ];
+
+      console.log(newArray);
+
+      localStorage.setItem("entries", JSON.stringify(newArray));
+    } else {
+      const newArray = [
+        ...enteries,
+        {
+          id: "sasdsadas",
+          title: planName,
+          books: selectedBooks.map((b) => {
+            return {
+              book_id: b.book_id,
+              chapters: [...b.chapters],
+            };
+          }),
+          timing: selectedTimes,
+          start_date: moment(startDate, "dd-mm-yyyy"),
+          end_date: moment(enddate, "dd-mm-yyyy"),
+        },
+      ];
+
+      localStorage.setItem("entries", JSON.stringify(newArray));
+      console.log(newArray);
+    }
   };
 
   return (
