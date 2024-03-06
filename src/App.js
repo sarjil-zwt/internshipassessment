@@ -29,8 +29,9 @@ function App() {
   });
 
   const handleDateChange = (e) => {
+    setStartDate(new Date(e.target.value));
     const date = new Date(e.target.value);
-    setStartDate(date);
+
     const today = new Date(Date.now());
 
     if (date.getTime() <= today) {
@@ -50,7 +51,7 @@ function App() {
       });
     });
 
-    if (!selectedBooks || !timingState) {
+    if (totalreadingTime == 0) {
       return toast("👿 Please Select books and chapters 👿");
     }
 
@@ -135,6 +136,12 @@ function App() {
   }
 
   const handleSubmit = () => {
+    console.log(
+      startDate,
+      ",,,,,,,,,,,,,,,,,,",
+      enddate,
+      "after handle date change"
+    );
     if (planName.length == 0 || startDate.length == 0) {
       return toast("👿 Please enter all fields 👿");
     }
@@ -179,8 +186,8 @@ function App() {
             };
           }),
           timing: newTimingState,
-          start_date: moment(startDate, "dd-mm-yyyy"),
-          end_date: moment(enddate, "dd-mm-yyyy"),
+          start_date: moment(startDate).format("ll"),
+          end_date: moment(enddate).format("ll"),
         },
       ];
 
@@ -203,8 +210,8 @@ function App() {
             };
           }),
           timing: newTimingState,
-          start_date: moment(startDate, "dd-mm-yyyy"),
-          end_date: moment(enddate, "dd-mm-yyyy"),
+          start_date: moment(startDate).format("ll"),
+          end_date: moment(enddate).format("ll"),
         },
       ];
 
@@ -267,7 +274,7 @@ function App() {
             <input
               type="date"
               className="startdate"
-              onChange={handleDateChange}
+              onChange={(e) => handleDateChange(e)}
               name=""
               id=""
             />
