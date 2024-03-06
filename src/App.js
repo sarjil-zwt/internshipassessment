@@ -50,6 +50,10 @@ function App() {
       });
     });
 
+    if (!selectedBooks || !timingState) {
+      return toast("👿 Please Select books and chapters 👿");
+    }
+
     let totalWeekTime = 0;
 
     for (let i = 0; i < 7; i++) {
