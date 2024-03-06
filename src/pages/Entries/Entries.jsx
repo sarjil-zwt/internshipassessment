@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Entries = () => {
-  return <div>Entries</div>;
+  const [entries, setEntries] = useState([]);
+
+  useEffect(() => {
+    setEntries(
+      localStorage.getItem("entries")
+        ? JSON.parse(localStorage.getItem("entries"))
+        : []
+    );
+  }, []);
+
+  return (
+    <div>
+      <table>
+        <thead>
+          <th></th>
+        </thead>
+      </table>
+    </div>
+  );
 };
 
 export default Entries;

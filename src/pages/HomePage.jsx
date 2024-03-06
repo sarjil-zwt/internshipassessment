@@ -1,7 +1,7 @@
 import React from "react";
-import bookData from "./bookData.json";
-import BookSelect from "./components/bookselect/BookSelect";
-import TimingSelect from "./components/timingselect/TimingSelect";
+import bookData from "../bookData.json";
+import BookSelect from "../components/bookselect/BookSelect";
+import TimingSelect from "../components/timingselect/TimingSelect";
 import moment from "moment";
 import toast, { Toaster } from "react-hot-toast";
 import { useState } from "react";
@@ -136,12 +136,7 @@ const HomePage = () => {
   }
 
   const handleSubmit = () => {
-    console.log(
-      startDate,
-      ",,,,,,,,,,,,,,,,,,",
-      enddate,
-      "after handle date change"
-    );
+    console.log(selectedBooks, "&&&&&&&&&");
     if (planName.length == 0 || startDate.length == 0) {
       return toast("👿 Please enter all fields 👿");
     }
@@ -205,7 +200,7 @@ const HomePage = () => {
           title: planName,
           books: selectedBooks.map((b) => {
             return {
-              book_id: b.book_id,
+              book_id: b.bookId,
               chapters: [...b.chapters],
             };
           }),
