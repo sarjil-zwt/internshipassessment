@@ -82,6 +82,11 @@ button {
   border: none;
 }
 
+button:disabled {
+  background-color: #060b10;
+  pointer-events: none;
+}
+
 button:hover {
   background-color: var(--hover-bgcolor);
   color: var(--color-high);

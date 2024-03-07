@@ -113,6 +113,15 @@ const TimingSelect = ({ timingState, setTimingState }) => {
     updatedTimes[k][updatedTimes[k].length - 1].endTime = e.target.value;
     setTimingState(updatedTimes);
   };
+
+  const removeTime = (k) => {
+    const updatedTimes = {
+      ...timingState,
+    };
+    updatedTimes[k].pop();
+    updatedTimes[k][updatedTimes[k].length - 1].disabled = false;
+    setTimingState(updatedTimes);
+  };
   return (
     <div className="timingselectdivswrapper container">
       {Object.keys(timingState).map((k, idx) => {
@@ -176,6 +185,14 @@ const TimingSelect = ({ timingState, setTimingState }) => {
                             })}
                         </select>
                       </div>
+                      <button
+                        onClick={() => removeTime(k)}
+                        disabled={
+                          timingState[k].length <= 1 || selectedtime.disabled
+                        }
+                      >
+                        -
+                      </button>
                     </div>
                     <div className="dividerhz"></div>
                   </Fragment>

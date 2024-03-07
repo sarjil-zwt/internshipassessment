@@ -25,17 +25,6 @@ const Entries = () => {
 
   return (
     <div className="entriespage">
-      {/* <div className="headings">
-          <h3>Index</h3>
-          <h3>ID</h3>
-          <h3>Title</h3>
-          <h3>Book</h3>
-          <h3>Chapters</h3>
-          <h3>Timing</h3>
-          <h3>Start Date</h3>
-          <h3>End Date</h3>
-        </div> */}
-
       <h1>Entries</h1>
 
       <div className="body">
@@ -84,8 +73,8 @@ const Entries = () => {
                   })}
                 </div>
               </div>
-              <p>Start Time - {entry.start_date}</p>
-              <p>End Time - {entry.end_date}</p>
+              <p>Start Date - {entry.start_date}</p>
+              <p>End Date - {entry.end_date}</p>
             </div>
           );
         })}

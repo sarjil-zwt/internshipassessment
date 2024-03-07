@@ -59,9 +59,20 @@ const BookSelect = ({ selectedBooks, setSelectedBooks }) => {
     });
     setSelectedBooks(updatedBooks);
   };
+
+  const removeBook = () => {
+    const updatedBooks = selectedBooks;
+
+    updatedBooks.pop();
+
+    updatedBooks[updatedBooks.length - 1].disabled = false;
+
+    console.log(updatedBooks);
+    setSelectedBooks([...updatedBooks]);
+  };
   return (
     <div className="bookselectdivswrapper container">
-      {selectedBooks?.map((sb, index) => {
+      {selectedBooks.map((sb, index) => {
         return (
           <div className="bookselectdiv" key={index}>
             <div className="bookselectelement">
@@ -72,7 +83,6 @@ const BookSelect = ({ selectedBooks, setSelectedBooks }) => {
                 key={index}
                 onChange={(e) => handleSelectedBook(e, index)}
                 disabled={sb.disabled}
-                value={selectedBooks[index].bookId}
               >
                 <option value=""></option>
                 {sb?.options?.map((o, i) => {
@@ -107,6 +117,14 @@ const BookSelect = ({ selectedBooks, setSelectedBooks }) => {
                 })}
               </select>
             </div>
+            <button
+              onClick={removeBook}
+              disabled={
+                selectedBooks.length <= 1 || selectedBooks[index].disabled
+              }
+            >
+              -
+            </button>
           </div>
         );
       })}
