@@ -137,7 +137,6 @@ const HomePage = () => {
   }
 
   const handleSubmit = () => {
-    console.log(selectedBooks, "&&&&&&&&&");
     if (planName.length == 0 || startDate.length == 0) {
       return toast("👿 Please enter all fields 👿");
     }

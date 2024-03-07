@@ -40,7 +40,6 @@ const Entries = () => {
 
       <div className="body">
         {entries.map((entry, index) => {
-          console.log(entry, "&&&&&&&&&**********");
           return (
             <div className="entry">
               <p>SR. No - {index + 1}</p>
