@@ -203,7 +203,7 @@ hr {
   background-color: var(--hover-bgcolor);
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 1000px) {
   .App {
     max-width: 100vw;
     display: flex;
