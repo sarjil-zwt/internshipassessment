@@ -51,6 +51,24 @@ h1 {
   color: var(--color-high);
 }
 
+a {
+  cursor: pointer;
+  padding: 5px;
+  min-width: 150px;
+  color: var(--color-secondary);
+  background-color: rgb(59, 67, 76);
+  border-radius: 5px;
+  transition: 0.2s all;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  text-align: center;
+}
+a:hover {
+  background-color: var(--hover-bgcolor);
+  color: var(--color-high);
+}
+
 button {
   cursor: pointer;
   padding: 5px;

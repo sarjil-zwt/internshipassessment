@@ -1,0 +1,81 @@
+.entriespage {
+  color: var(--color-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 30px;
+  padding: 50px 0;
+}
+
+table {
+  border: 1px dotted var(--border-color);
+}
+
+.headings {
+  display: flex;
+  gap: 50px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+.entry {
+  display: flex;
+  flex-direction: column;
+  background-color: #12181f;
+  color: var(--color-secondary);
+  border: 1px solid var(--border-color);
+  padding: 50px;
+  width: 80%;
+  gap: 30px;
+  border-radius: 10px;
+}
+
+.booksdiv {
+  display: flex;
+  gap: 20px;
+}
+
+.singlebook {
+  /* border: 1px dotted lightcoral; */
+  display: flex;
+  gap: 30px;
+}
+
+.timing {
+  display: flex;
+  /* flex-direction: column; */
+  gap: 10px;
+}
+
+.timingswrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.singletiming {
+  display: flex;
+  gap: 20px;
+}
+
+.singledaytimes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .entry {
+    /* width: 100%; */
+    padding: 0;
+    flex-direction: column;
+    padding: 50px 20px;
+  }
+}

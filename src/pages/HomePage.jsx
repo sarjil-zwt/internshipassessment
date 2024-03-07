@@ -5,6 +5,7 @@ import TimingSelect from "../components/timingselect/TimingSelect";
 import moment from "moment";
 import toast, { Toaster } from "react-hot-toast";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const [enddate, setEnddate] = useState("");
@@ -287,6 +288,8 @@ const HomePage = () => {
         <button className="submitbutton" onClick={handleSubmit}>
           Submit
         </button>
+
+        <Link to={"/entries"}>View all Entries</Link>
       </div>
     </div>
   );
