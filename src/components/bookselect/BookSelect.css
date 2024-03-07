@@ -23,3 +23,8 @@
 select.bookchapterselect {
   min-height: 150px;
 }
+@media only screen and (max-width: 500px) {
+  .bookselectdiv {
+    flex-direction: column;
+  }
+}

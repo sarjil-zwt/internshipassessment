@@ -23,4 +23,11 @@ while (i < 24) {
   i++;
 }
 
+times.push({
+  hours: 12,
+  minutes: "00",
+  meridiem: "AM",
+  t: ++t,
+});
+
 export default times;

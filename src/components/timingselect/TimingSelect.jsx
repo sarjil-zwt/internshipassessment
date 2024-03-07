@@ -55,6 +55,10 @@ const TimingSelect = ({ timingState, setTimingState }) => {
       }
     }
 
+    if (time.t == times.length) {
+      return true;
+    }
+
     return false;
   };
 
@@ -109,7 +113,7 @@ const TimingSelect = ({ timingState, setTimingState }) => {
     updatedTimes[k][updatedTimes[k].length - 1].endTime = e.target.value;
     setTimingState(updatedTimes);
   };
-
+  console.log(times, "Times");
   return (
     <div className="timingselectdivswrapper container">
       {Object.keys(timingState).map((k, idx) => {

@@ -58,3 +58,13 @@
   position: relative;
   left: -40px;
 }
+@media only screen and (max-width: 500px) {
+  .divider {
+    display: none;
+    position: inherit;
+  }
+  .dividerhz {
+    width: 100%;
+    position: inherit;
+  }
+}
